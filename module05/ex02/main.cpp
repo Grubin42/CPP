@@ -6,7 +6,6 @@
 
 int    main(void)
 {
-
     try
     {
         Bureaucrat chef("Henry", 25);
@@ -31,4 +30,5 @@ int    main(void)
         std::cerr << e.what() << std::endl;
     }
     return (0);
+
 }
