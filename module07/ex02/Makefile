@@ -1,4 +1,4 @@
-NAME = template
+NAME = array
 
 CC = c++
 
@@ -10,7 +10,7 @@ SRCS_DIR = ./src
 OBJS_DIR = ./objs
 
 SRCS =	main.cpp \
-		
+
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 
 vpath %.c $(SRCS_DIR)
