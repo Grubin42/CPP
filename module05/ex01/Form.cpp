@@ -1,24 +1,21 @@
 #include "FormClass.hpp"
-
+#include "BureaucratClass.hpp"
 
 //constructor
-Form::Form(std::string name, int const gradeSign, int const gradeExec)
-:   _name(name) {
+Form::Form(const std::string &name, int gradeSign, int gradeExec)
+:   _name(name), _signature(false), _gradeToSign(gradeSign), _gradeToExec(gradeExec) {
     
-    this->_signature = false;
     if (gradeSign < 1 || gradeExec < 1) 
         throw Bureaucrat::GradeTooHighException();
     else if (gradeSign > 150 || gradeExec > 150)
         throw Bureaucrat::GradeTooLowException();
     else {
-        this->_gradeToSign = gradeSign;
-        this->_gradeToExec = gradeExec;
         std::cout << "New form create: " << *this << std::endl;
-
     }
 }
 
-Form::Form(const Form & src) {
+Form::Form(const Form & src)
+:   _name(src._name), _gradeToSign(src._gradeToSign), _gradeToExec(src._gradeToExec) {
 
     *this = src;
 }
@@ -32,17 +29,12 @@ Form::~Form() {
 //operator
 Form & Form::operator=(const Form & src) {
 
-    if (this != &src) {
-        this->_name = src._name;
-        this->_signature = src._signature;
-        this->_gradeToExec = src._gradeToExec;
-        this->_gradeToSign = src._gradeToSign;
-    }
-    return *this;
+    this->_signature = src._signature;
+    return (*this);
 }
 
 //get
-std::string Form::getName(void) const {
+const std::string &Form::getName(void) const {
 
     return this->_name;
 }
@@ -63,7 +55,7 @@ bool Form::getSignature(void) const {
 }
 
 //function membre
-void Form::beSigned(const Bureaucrat name) {
+void Form::beSigned(const Bureaucrat &name) {
 
     try {
 

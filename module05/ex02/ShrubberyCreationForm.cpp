@@ -1,41 +1,31 @@
 #include "ShrubberyCreationFormClass.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) {
-
-    AForm::setSignature(false);
-    AForm::setName(target);
-    AForm::setGradeToSign(145);
-    AForm::setGradeToExec(137);
-    std::cout << "New form create: " << *this << std::endl;
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
+	: AForm("shrubbery creation", ShrubberyCreationForm::signGrade, ShrubberyCreationForm::execGrade), _target(target)
+{
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & src) {
-
-    *this = src;
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {
-
-    std::cout << "destructor ShrubberyCreationForm create: " << std::endl;
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs)
+	: AForm (rhs.getName(), ShrubberyCreationForm::signGrade, ShrubberyCreationForm::execGrade), _target(rhs._target)
+{
+	*this = rhs;
 }
 
-ShrubberyCreationForm & ShrubberyCreationForm::operator=(const ShrubberyCreationForm & src) {
-
-    if (this != &src) {
-        AForm::setSignature(src.getSignature());
-        AForm::setName(src.getName());
-        AForm::setGradeToSign(src.getGradeToSign());
-        AForm::setGradeToExec(src.getGradeToExec());
-    }
-    return *this;
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs)
+{
+	(void)rhs;
+	return (*this);
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
+void	ShrubberyCreationForm::doExecution() const
+{
+	std::ofstream os;
 
-    std::ofstream os;
-
-    std::cout << executor.getName() << " create a tree!" << std::endl;
-	os.open((this->getName() + "_shrubbery").c_str());
+	os.open((_target + "_shrubbery").c_str());
 	if (!os.is_open())
 		return ;
 	os << "               ,@@@@@@@," << std::endl;
@@ -47,6 +37,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	os << "   `&%\\ ` /%&'    |.|        \\ '|8'" << std::endl;
 	os << "       |o|        | |         | |" << std::endl;
 	os << "       |.|        | |         | |" << std::endl;
-	os << "    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_" << std::endl;
+	os << "jgs \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_" << std::endl;
 	os.close();
 }

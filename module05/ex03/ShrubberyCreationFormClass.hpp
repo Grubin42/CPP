@@ -6,18 +6,20 @@ class Bureaucrat;
 
 class ShrubberyCreationForm : public AForm
 {
-    public:
-        //constructor
-        ShrubberyCreationForm(std::string target);
-        ShrubberyCreationForm(const ShrubberyCreationForm & src);
-        //destructor
-        ~ShrubberyCreationForm();
+	public:
+		ShrubberyCreationForm(const std::string &target);
+		ShrubberyCreationForm(const ShrubberyCreationForm &);
+		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &);
+		~ShrubberyCreationForm();
 
-        //operator
-        ShrubberyCreationForm & operator=(const ShrubberyCreationForm & src);
+	private:
 
-        //function membre
-        void execute(Bureaucrat const & executor) const;
+		static const int	signGrade = 145;
+		static const int	execGrade = 137;
+
+		void	doExecution() const;
+		const std::string	_target;
+
 };
 
 #endif 

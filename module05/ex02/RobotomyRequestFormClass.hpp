@@ -6,19 +6,21 @@ class Bureaucrat;
 #include <time.h>
 
 class RobotomyRequestForm : public AForm
-{  
-    public:
-        //constructor
-        RobotomyRequestForm(std::string target);
-        RobotomyRequestForm(const RobotomyRequestForm & src);
-        //destructor
-        ~RobotomyRequestForm();
+{
+	public:
+		RobotomyRequestForm(const std::string &target);
+		RobotomyRequestForm(const RobotomyRequestForm &);
+		RobotomyRequestForm &operator=(const RobotomyRequestForm &);
+		~RobotomyRequestForm();
 
-        //operator
-        RobotomyRequestForm & operator=(const RobotomyRequestForm & src);
+	private:
 
-        //function membre
-        void execute(Bureaucrat const & executor) const;
+		static const int	signGrade = 72;
+		static const int	execGrade = 45;
+
+		void	doExecution() const;
+		const std::string	_target;
+
 };
 
 #endif

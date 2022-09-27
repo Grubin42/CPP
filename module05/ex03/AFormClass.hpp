@@ -8,15 +8,17 @@ class Bureaucrat;
 class AForm 
 {
 private:
-    std::string _name;
+    const std::string _name;
     bool _signature;
-    int _gradeToSign;
-    int _gradeToExec;
+    const int _gradeToSign;
+    const int _gradeToExec;
+
+protected:
+	virtual void	doExecution() const = 0;
 
 public:
     //constructor
-    AForm();
-    AForm(std::string name, int const gradeSign, int const gradeExec);
+    AForm(const std::string &name, int gradeSign, int gradeExec);
     AForm(const AForm & src);
 
     //destructor
@@ -26,22 +28,30 @@ public:
     AForm & operator=(const AForm & src);
 
     //get
-    std::string getName(void) const;
+    const std::string &getName(void) const;
     int getGradeToSign(void) const;
     int getGradeToExec(void) const;
     bool getSignature(void) const;
 
     //set
+    /*
     void setName(std::string name);
     void setGradeToSign(int const gradeSign);
     void setGradeToExec(int const gradeExec);
     void setSignature(bool signature);
-
+    */
+   
     //function membre
-    void beSigned(const Bureaucrat name);
-    virtual void execute(Bureaucrat const & executor) const = 0;
+    void beSigned(const Bureaucrat &name);
+    void execute(Bureaucrat const & executor) const;
 
     //class
+    class SignatureFail: public std::exception {
+
+        public:
+            virtual const char* what() const throw();    
+    };
+    
     class GradeTooHighException: public std::exception {
 
         public:

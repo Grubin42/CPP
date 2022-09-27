@@ -29,10 +29,12 @@ Cat&    Cat::operator=(const Cat& rhs)
 {
     std::cout << "Copy assignment operator called" << std::endl;
     Animal::operator=(rhs);
-    if (this->_Brain)
-        delete (this->_Brain);
     if (this != &rhs)
+    {
+        if (this->_Brain)
+            delete (this->_Brain);
         this->_Brain = new Brain(*rhs._Brain);
+    }
     return (*this);
 }
 

@@ -1,4 +1,4 @@
-class AForm;
+class Form;
 #ifndef BUREAUCRATCLASS_H
 # define BUREAUCRATCLASS_H
 #include <iostream>
@@ -12,7 +12,7 @@ private:
 
 public:
     //constructor
-    Bureaucrat(std::string name, int grade);
+    Bureaucrat(const std::string & name, int grade);
     Bureaucrat(const Bureaucrat & src);
 
     //destructor
@@ -28,7 +28,7 @@ public:
     //function membre
     void upGrade(void);
     void downGrade(void);
-    void signForm(AForm & name);
+    void signForm(Form & name);
 
     //class
     class GradeTooHighException: public std::exception {

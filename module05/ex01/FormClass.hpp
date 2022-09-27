@@ -5,33 +5,33 @@ class Bureaucrat;
 #include "BureaucratClass.hpp"
 
 
-class AForm 
+class Form 
 {
 private:
-    std::string _name;
+    const std::string _name;
     bool _signature;
-    int _gradeToSign;
-    int _gradeToExec;
+    const int _gradeToSign;
+    const int _gradeToExec;
 
 public:
     //constructor
-    AForm(std::string name, int const gradeSign, int const gradeExec);
-    AForm(const AForm & src);
+    Form(const std::string &name, int gradeSign, int gradeExec);
+    Form(const Form & src);
 
     //destructor
-    ~AForm();
+    ~Form();
 
     //operator
-    AForm & operator=(const AForm & src);
+    Form & operator=(const Form & src);
 
     //get
-    std::string getName(void) const;
+    const std::string &getName(void) const;
     int getGradeToSign(void) const;
     int getGradeToExec(void) const;
     bool getSignature(void) const;
 
     //function membre
-    void beSigned(const Bureaucrat name);
+    void beSigned(const Bureaucrat &name);
 
     //class
     class GradeTooHighException: public std::exception {
@@ -46,5 +46,5 @@ public:
     };
 };
 
-std::ostream & operator<<(std::ostream & o, AForm const & src);
+std::ostream & operator<<(std::ostream & o, Form const & src);
 #endif

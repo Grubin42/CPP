@@ -1,43 +1,33 @@
 #include "RobotomyRequestFormClass.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) {
-
-    AForm::setSignature(false);
-    AForm::setName(target);
-    AForm::setGradeToSign(72);
-    AForm::setGradeToExec(45);
-    std::cout << "NEW FORM create: " << *this << std::endl;
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
+	: AForm("robotomy request", RobotomyRequestForm::signGrade, RobotomyRequestForm::execGrade), _target(target)
+{
+	std::srand (time(NULL));
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm & src) {
-
-    *this = src;
+RobotomyRequestForm::~RobotomyRequestForm()
+{
 }
 
-RobotomyRequestForm::~RobotomyRequestForm() {
-
-    std::cout << "destructor RobotomyRequestForm create: " << std::endl;
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &rhs)
+	: AForm (rhs.getName(), RobotomyRequestForm::signGrade, RobotomyRequestForm::execGrade), _target(rhs._target)
+{
+	*this = rhs;
 }
 
-RobotomyRequestForm & RobotomyRequestForm::operator=(const RobotomyRequestForm & src) {
-
-    if (this != &src) {
-        AForm::setSignature(src.getSignature());
-        AForm::setName(src.getName());
-        AForm::setGradeToSign(src.getGradeToSign());
-        AForm::setGradeToExec(src.getGradeToExec());
-    }
-    return *this;
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs)
+{
+	(void)rhs;
+	return (*this);
 }
 
-void RobotomyRequestForm::execute(Bureaucrat const & executor) const {
-
-    srand(time(0));
-    int value = rand();
-    
-    std::cout << executor.getName() << " makes drill noise" << std::endl;
-    if (value % 2 == 0)
-        std::cout << this->getName() << " has been robotomized with success" << std::endl;
-    else
-        std::cout << this->getName() << " failed" << std::endl;
+void	RobotomyRequestForm::doExecution() const
+{
+	int success = std::rand() % 2;
+	std::cout << "* Do some drilling noises .... *" << std::endl;
+	if (success)
+		std::cout << "Robotomy is a success !" << std::endl;
+	else
+		std::cout << "Unfortunately, the robotomy has failed. RIP." << std::endl;
 }

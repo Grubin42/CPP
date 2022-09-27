@@ -6,66 +6,71 @@ template<typename T>
 class Array {
 
     private:
-        T * tab;
+        unsigned int _size;
+        T * _tab;
 
     public:
         //constructor
         Array<T>() {
             
-            this->tab = NULL;
-            this->sizeTab = 0;
+            this->_tab = new T[0];
         };
-        Array<T>(unsigned int n) {
+
+        Array<T>(unsigned int n): _size(n), _tab(NULL) {
             
-            if (n != 0) {
-                tab = new T[n];
-                for (int i = 0; i < size() - 1; i++) 
-                    this->tab[i] = 0;
+            if (_size) {
+
+                this->_tab = new T[n];
             }
         };
 
-        Array<T>(const Array & src) {
+        Array<T>(const Array & src): _tab(NULL) {
 
             *this = src;
         };
 
         //destructor
-        ~Array() {};
+        ~Array() {
+
+            if (_size)
+                delete[] this->_tab;
+        };
 
         //operator
         Array<T> & operator=(const Array & src) {
 
-            if (tab && this != &src) {
+            if (this != &src) {
 
+                if (this->_tab)
+                    delete[] this->_tab;
+                this->_size = src._size;
+                this->_tab = new T[src._size];
                 for (int i = 0; i < size() - 1; i++)
-                    this->tab[i] = src.tab[i];
+                    this->_tab[i] = src._tab[i];
             }
             return *this;
         };
 
-        T & operator[](int index) {
+        T & operator[](unsigned int index) {
 
-            try
-            {
-                if (index == 0)
-                    return tab[index];
-            }
-            catch(const std::exception& e)
-            {
-                std::cerr << e.what() << '\n';
-            } 
-            return tab[index];
+            if (index >= _size)
+                throw InvalidSizeException();
+            return _tab[index];
         };
 
         //function membre
         T size(void) {
 
-            int count = 0;
-            while (tab[count])
-            {
-                count++;
-            }
-            return count;
+            return (this->_size);
+        };
+
+        class InvalidSizeException : public std::exception {
+
+            public:
+                virtual const char* what() const throw() {
+
+                    return ("Index invalid");
+                }
         };
 };
 

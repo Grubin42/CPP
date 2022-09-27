@@ -55,7 +55,18 @@
         "iomanip": "cpp",
         "sstream": "cpp",
         "stack": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "__functional_base": "cpp",
+        "__node_handle": "cpp",
+        "__tree": "cpp",
+        "algorithm": "cpp",
+        "bit": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "optional": "cpp",
+        "utility": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

@@ -36,9 +36,10 @@ int Convert::is_char(std::string arg)
     if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4'
 		|| c == '5' || c == '6' || c == '7' || c == '8' || c == '9')
         return (0);
-    if ((c >= ' ' || c <= '~') && arg[1] == '\0')
+    else if ((c >= ' ' || c <= '~') && arg[1] == '\0')
         return (1);
-	return (0);
+	else
+		return (0);
 }
 
 int Convert::is_int(std::string arg)

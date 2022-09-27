@@ -5,19 +5,20 @@ class Bureaucrat;
 
 class PresidentialPardonForm : public AForm
 {
-    public:
-        //constructor
-        PresidentialPardonForm(std::string target);
-        PresidentialPardonForm(const PresidentialPardonForm & src);
-        
-        //destructor
-        ~PresidentialPardonForm();
+	public:
+		PresidentialPardonForm(const std::string &target);
+		PresidentialPardonForm(const PresidentialPardonForm &);
+		PresidentialPardonForm &operator=(const PresidentialPardonForm &);
+		~PresidentialPardonForm();
 
-        //operator
-        PresidentialPardonForm & operator=(const PresidentialPardonForm & src);
+	private:
 
-        //function membre
-        void execute(Bureaucrat const & executor) const;
+		static const int	signGrade = 25;
+		static const int	execGrade = 5;
+
+		void	doExecution() const;
+		const std::string	_target;
+
 };
 
 #endif

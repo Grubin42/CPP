@@ -1,7 +1,8 @@
 #include "BureaucratClass.hpp"
 #include "FormClass.hpp"
+
 //constructor
-Bureaucrat::Bureaucrat(std::string name, int grade): _name(name){
+Bureaucrat::Bureaucrat(const std::string & name, int grade): _name(name){
 
     if (grade < 1)
         throw Bureaucrat::GradeTooHighException();

@@ -4,7 +4,7 @@ void Convert::ft_print_char(std::string arg)
 {
     std::cout << "char: " << static_cast<char>(arg[0]) << std::endl;
     std::cout << "int: " << static_cast<int>(arg[0]) << std::endl;
-    std::cout << "float: " << static_cast<float>(arg[0]) << std::endl;
+    std::cout  << std::fixed << std::setprecision(1) << "float: " << static_cast<float>(arg) << 'f' << std::endl;
     std::cout << "double: " << static_cast<double>(arg[0]) << std::endl;
 }
 
@@ -15,7 +15,7 @@ void Convert::ft_print_double(double arg)
     else
         std::cout << "char: " << "is not printable" << std::endl;
     std::cout << "int: " << static_cast<int>(arg) << std::endl;
-    std::cout  << std::fixed << std::setprecision(2) << "float: " << static_cast<float>(arg) << 'f' << std::endl;
+    std::cout  << std::fixed << std::setprecision(1) << "float: " << static_cast<float>(arg) << 'f' << std::endl;
     std::cout << "double: " << arg << std::endl;
 }
 
@@ -26,7 +26,7 @@ void Convert::ft_print_int(int arg)
     else
         std::cout << "char: " << "is not printable" << std::endl;
     std::cout << "int: " << (arg) << std::endl;
-    std::cout << "float: " << static_cast<float>(arg) << std::endl;
+    std::cout  << std::fixed << std::setprecision(1) << "float: " << static_cast<float>(arg) << 'f' << std::endl;
     std::cout << "double: " << static_cast<double>(arg) << std::endl;
 }
 

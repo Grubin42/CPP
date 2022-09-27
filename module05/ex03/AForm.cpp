@@ -1,26 +1,21 @@
 #include "AFormClass.hpp"
+#include "BureaucratClass.hpp"
 
 //constructor
-AForm::AForm() {
-
-}
-
-AForm::AForm(std::string name, int const gradeSign, int const gradeExec)
-:   _name(name) {
+AForm::AForm(const std::string &name, int gradeSign, int gradeExec)
+:   _name(name), _signature(false), _gradeToSign(gradeSign), _gradeToExec(gradeExec) {
     
     if (gradeSign < 1 || gradeExec < 1) 
         throw Bureaucrat::GradeTooHighException();
     else if (gradeSign > 150 || gradeExec > 150)
         throw Bureaucrat::GradeTooLowException();
     else {
-        this->_gradeToSign = gradeSign;
-        this->_gradeToExec = gradeExec;
-        this->_signature = false;
         std::cout << "New form create: " << *this << std::endl;
     }
 }
 
-AForm::AForm(const AForm & src) {
+AForm::AForm(const AForm & src)
+:   _name(src._name), _gradeToSign(src._gradeToSign), _gradeToExec(src._gradeToExec) {
 
     *this = src;
 }
@@ -34,17 +29,12 @@ AForm::~AForm() {
 //operator
 AForm & AForm::operator=(const AForm & src) {
 
-    if (this != &src) {
-        this->_name = src._name;
-        this->_signature = src._signature;
-        this->_gradeToExec = src._gradeToExec;
-        this->_gradeToSign = src._gradeToSign;
-    }
-    return *this;
+    this->_signature = src._signature;
+    return (*this);
 }
 
 //get
-std::string AForm::getName(void) const {
+const std::string &AForm::getName(void) const {
 
     return this->_name;
 }
@@ -65,6 +55,7 @@ bool AForm::getSignature(void) const {
 }
 
 //set
+/*
 void AForm::setName(std::string name) {
 
     this->_name = name;
@@ -108,10 +99,10 @@ void AForm::setSignature(bool signature) {
 
     this->_signature = signature;
 }
-
+*/
 
 //function membre
-void AForm::beSigned(const Bureaucrat name) {
+void AForm::beSigned(const Bureaucrat &name) {
 
     try {
 
@@ -125,7 +116,27 @@ void AForm::beSigned(const Bureaucrat name) {
     }
 }
 
+void	AForm::execute(const Bureaucrat &executor) const
+{
+	if (!_signature)
+	{
+		throw SignatureFail();
+		return ;
+	}
+	if (executor.getGrade() > this->_gradeToExec)
+	{
+		throw GradeTooLowException();
+		return ;
+	}
+	doExecution();
+}
+
 //class
+const char* AForm::SignatureFail::what() const throw() {
+
+    return "Exception the signature is not good";
+}
+
 const char* AForm::GradeTooHighException::what() const throw() {
 
     return "Exception the grade value is too high";

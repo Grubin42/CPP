@@ -7,8 +7,8 @@ int    main(void)
     {
         Bureaucrat chef("Henry", 149);
         std::cout << chef << std::endl;
-        AForm a1("a1", 150, 150);
-        AForm a2("a2", 150, 150);
+        Form a1("a1", 150, 150);
+        Form a2("a2", 150, 150);
         std::cout << a1 << std::endl;
         chef.signForm(a1);
         std::cout << a1 << std::endl;

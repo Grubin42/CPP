@@ -1,7 +1,7 @@
 #include "BureaucratClass.hpp"
 
 //constructor
-Bureaucrat::Bureaucrat(std::string name, int grade): _name(name){
+Bureaucrat::Bureaucrat(const std::string & name, int grade): _name(name){
 
     if (grade < 1)
         throw Bureaucrat::GradeTooHighException();
@@ -27,11 +27,9 @@ Bureaucrat::~Bureaucrat() {
 //operator
 Bureaucrat & Bureaucrat::operator=(const Bureaucrat & src) {
 
-    if (this != &src) {
-        this->_name = src._name;
-        this->_grade = src._grade;
-    }
-    return *this;
+    this->_name = src._name;
+    this->_grade = src._grade;
+    return (*this);
 }
 
 //get
