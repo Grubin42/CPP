@@ -10,7 +10,6 @@ SRCS_DIR = ./src
 OBJS_DIR = ./objs
 
 SRCS =	main.cpp \
-		MutantStack.cpp \
 		
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 
