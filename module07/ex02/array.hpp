@@ -6,7 +6,7 @@ template<typename T>
 class Array {
 
     private:
-        unsigned int _size;
+        size_t _size;
         T * _tab;
 
     public:
@@ -45,7 +45,7 @@ class Array {
                     delete[] this->_tab;
                 this->_size = src._size;
                 this->_tab = new T[src._size];
-                for (int i = 0; i < size() - 1; i++)
+                for (size_t i = 0; i < size() - 1; i++)
                     this->_tab[i] = src._tab[i];
             }
             return *this;
@@ -58,8 +58,15 @@ class Array {
             return _tab[index];
         };
 
+        const T & operator[](unsigned int index)const{
+
+            if (index >= _size)
+                throw InvalidSizeException();
+            return _tab[index];
+        };
+
         //function membre
-        T size(void) {
+        size_t size(void) const{
 
             return (this->_size);
         };

@@ -4,7 +4,7 @@ void Convert::ft_print_char(std::string arg)
 {
     std::cout << "char: " << static_cast<char>(arg[0]) << std::endl;
     std::cout << "int: " << static_cast<int>(arg[0]) << std::endl;
-    std::cout  << std::fixed << std::setprecision(1) << "float: " << static_cast<float>(arg) << 'f' << std::endl;
+    std::cout  << std::fixed << std::setprecision(1) << "float: " << static_cast<float>(arg[0]) << 'f' << std::endl;
     std::cout << "double: " << static_cast<double>(arg[0]) << std::endl;
 }
 

@@ -20,11 +20,14 @@ int main(void)
 
     try
     {
-        Array<int> b(a);
+        if (a.size())
+        {
+            Array<int> b(a);
 
-        b[0] = 8;
-        std::cout << "b:" << b[0] << std::endl;
-        std::cout << "a:" << a[3] << std::endl;
+            b[0] = 8;
+            std::cout << "b:" << b[0] << std::endl;
+            std::cout << "a:" << a[3] << std::endl;
+        }
     }
     catch(const std::exception& e)
     {
